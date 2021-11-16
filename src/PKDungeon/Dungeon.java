@@ -7,10 +7,12 @@ import java.util.Collection;
 import java.util.Iterator;
 
 public class Dungeon {
+    /****************** Field *******************/
     //design pattern of singleton
     static private Dungeon instance;
     private ArrayList<Room> rooms;
 
+    /****************** Costructor *******************/
     private Dungeon(){
         rooms = new ArrayList<>();
     }
@@ -30,6 +32,17 @@ public class Dungeon {
         return instance;
     }
 
+    /****************** Method *******************/
+    public void addRoom(Room r){
+        rooms.add(r);
+    }
+
+    /****************** Setter *******************/
+    public void setPG(PG p){
+        rooms.get(0).setPresente(p);
+    }
+
+    /****************** Getter *******************/
     public Dungeon getInstance(Collection<Room> add){
         if(instance == null){
             instance = new Dungeon(add);
@@ -41,11 +54,5 @@ public class Dungeon {
         return rooms;
     }
 
-    public void addRoom(Room r){
-        rooms.add(r);
-    }
 
-    public void setPG(PG p){
-        rooms.get(0).setPresente(p);
-    }
 }

@@ -7,6 +7,7 @@ import java.lang.reflect.Array;
 import java.security.PublicKey;
 import java.util.ArrayList;
 
+//TODO da rifare tutta
 public class AllMap {
     /*
     ASCII art grafic ideaù

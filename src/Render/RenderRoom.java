@@ -10,9 +10,9 @@ public class RenderRoom {
             }
             System.out.println();
         }
-        System.out.println("\n+stanze connesse");
+        System.out.println("\nstanze connesse");
         for(int i = 0; i < r.getAnother_rooms().size(); i++){
-            System.out.println(i+1 +"-"+ r.getAnother_rooms().get(i).getStart());
+            System.out.println(i+1 +" - "+ r.getAnother_rooms().get(i).getName());
         }
     }
 }

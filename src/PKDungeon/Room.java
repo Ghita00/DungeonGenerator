@@ -4,10 +4,10 @@ import Player.PG;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.LinkedList;
 
 public class Room implements Comparable<Room>{
+    /****************** Field *******************/
     //that is aux
     private static int seed = 0;
 
@@ -17,10 +17,11 @@ public class Room implements Comparable<Room>{
     private String name;
     private int size_x;
     private int size_y;
-    private ArrayList<Item> items;
+    private Collection<Item> items;
     private LinkedList<Room> another_rooms;
     private PG presente = null;
 
+    /****************** Costructor *******************/
     public Room(int y, int x){
         name = "stanza-" + seed;
         ID = ++seed;
@@ -28,7 +29,6 @@ public class Room implements Comparable<Room>{
         size_x = x;
         items = new ArrayList<>();
         another_rooms = new LinkedList<>();
-        Collections.addAll(another_rooms, null, null, null, null);
         SetFirst();
     }
 
@@ -39,11 +39,10 @@ public class Room implements Comparable<Room>{
         size_x = x;
         items = new ArrayList<>();
         another_rooms = new LinkedList<>();
-        Collections.addAll(another_rooms, null, null, null, null);
         SetFirst();
     }
 
-    public Room(int y, int x, LinkedList<Room> rooms) throws MyExc.Moreroom {
+    public Room(int y, int x, LinkedList<Room> rooms) throws MyExc.MoreRoom {
         name = "stanza-" + seed;
         ID = ++seed;
         size_y = y;
@@ -55,11 +54,11 @@ public class Room implements Comparable<Room>{
             another_rooms.addAll(rooms);
             SetFirst();
         }else{
-            throw new MyExc.Moreroom();
+            throw new MyExc.MoreRoom();
         }
     }
 
-    public Room(int y, int x, String name, LinkedList<Room> rooms) throws MyExc.Moreroom{
+    public Room(int y, int x, String name, LinkedList<Room> rooms) throws MyExc.MoreRoom {
         ID = ++seed;
         this.name = name;
         size_y = y;
@@ -71,10 +70,11 @@ public class Room implements Comparable<Room>{
             another_rooms.addAll(rooms);
             SetFirst();
         }else{
-            throw new MyExc.Moreroom();
+            throw new MyExc.MoreRoom();
         }
     }
 
+    /****************** Method *******************/
     private void SetFirst(){
         if(ID == 1){
             this.start = true;
@@ -91,21 +91,44 @@ public class Room implements Comparable<Room>{
         }
     }
 
-    public void Union(Room r) throws MyExc.Moreroom {
-        if(this.start){
-            MakeUnion(r, 3);
-        }else{
-            MakeUnion(r, 4);
+    public void Union(Room r) throws MyExc.MoreRoom, MyExc.OtherRoom{
+        ArrayList<Room> rooms = Dungeon.getInstance().getRooms();
+        boolean search_this = false;
+        boolean search_r = false;
+
+        //control the rooms are part of dungeon
+        int i = 0;
+        while (i < rooms.size() && !search_this){
+            search_this = this.equals(rooms.get(i));
+            i++;
         }
 
+        i = 0;
+        while (i < rooms.size() && !search_r){
+            search_r = r.equals(rooms.get(i));
+            i++;
+        }
+
+        //TODO control exist the bridge
+
+
+        if(search_r && search_this){
+            if(this.start){
+                MakeUnion(r, 3);
+            }else{
+                MakeUnion(r, 4);
+            }
+        }else{
+            throw new MyExc.OtherRoom();
+        }
     }
 
-    private void MakeUnion(Room r, int n) throws MyExc.Moreroom{
+    private void MakeUnion(Room r, int n) throws MyExc.MoreRoom {
         if(this.another_rooms.size() < n && r.another_rooms.size() < n){
             this.another_rooms.add(r);
             r.another_rooms.add(this);
         }else{
-            throw new MyExc.Moreroom();
+            throw new MyExc.MoreRoom();
         }
     }
     
