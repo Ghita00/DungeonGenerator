@@ -2,6 +2,7 @@ import PKDungeon.Dungeon;
 import PKDungeon.MyExc.MoreRoom;
 import PKDungeon.MyExc;
 import PKDungeon.Room;
+import Player.PG;
 import Render.RenderRoom;
 
 import java.util.Collections;
@@ -14,9 +15,9 @@ public class Main {
 
         Collections.addAll(MyDun.getRooms(), r1, r2);
         r1.Union(r2);
-        r1.Union(r2);
+        //r2.Union(r1);
 
-        //MyDun.setPG(new PG());
+        MyDun.setPG(new PG());
         RenderRoom.Render(MyDun.getRooms().get(1));
     }
 }
