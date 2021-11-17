@@ -19,10 +19,7 @@ public class Dungeon {
 
     private Dungeon(Collection<Room> add){
         rooms = new ArrayList<>();
-        Iterator<Room> i = add.iterator();
-        while(i.hasNext()){
-            rooms.add(i.next());
-        }
+        rooms.addAll(add);
     }
 
     static public Dungeon getInstance(){
@@ -32,10 +29,42 @@ public class Dungeon {
         return instance;
     }
 
+    static public Dungeon getInstanceCollection(Collection<Room> add){
+        if(instance == null){
+            instance = new Dungeon(add);
+        }
+        return instance;
+    }
+
     /****************** Method *******************/
     public void addRoom(Room r){
         rooms.add(r);
     }
+
+    private void makeWalk(int old, int next){
+        PG present = rooms.get(old).getPresente();
+        rooms.get(old).setPresente(null);
+        rooms.get(next).setPresente(present);
+    }
+
+    public void nextRoom(){
+        Room r = null;
+        int i = 0;
+        int inputNum = -1;
+        boolean trovata = false;
+
+        while(i < rooms.size() && !trovata){
+            trovata = rooms.get(i).getPresente() != null;
+            r = rooms.get(i);
+        }
+
+        /*TODO lettura da input con inputNum*/
+
+        if(inputNum > 0 && inputNum <= 4 && r.getAnother_rooms().get(inputNum) != null){
+            makeWalk(i, inputNum-1);
+        }
+    }
+
 
     /****************** Setter *******************/
     public void setPG(PG p){

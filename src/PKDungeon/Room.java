@@ -138,11 +138,12 @@ public class Room implements Comparable<Room>{
         }
     }
     
-    /****************** Getter *******************/
+    /****************** Setter *******************/
     public void setPresente(PG p){
         this.presente = p;
     }
 
+    /****************** Getter *******************/
     public int getSize_x() {
         return size_x;
     }
@@ -159,6 +160,9 @@ public class Room implements Comparable<Room>{
         return name;
     }
 
+    public PG getPresente() {
+        return presente;
+    }
     /****************** For compare  *******************/
     @Override
     public int compareTo(Room o) {

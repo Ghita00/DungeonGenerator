@@ -12,7 +12,11 @@ public class RenderRoom {
         }
         System.out.println("\nstanze connesse");
         for(int i = 0; i < r.getAnother_rooms().size(); i++){
-            System.out.println(i+1 +" - "+ r.getAnother_rooms().get(i).getName());
+            if(r.getAnother_rooms().get(i) != null){
+                System.out.println(i+1 +" - "+ r.getAnother_rooms().get(i).getName());
+            }else{
+                System.out.println(i+1 +" - il nulla");
+            }
         }
     }
 }
