@@ -65,7 +65,6 @@ public class Dungeon {
         }
     }
 
-
     /****************** Setter *******************/
     public void setPG(PG p){
         rooms.get(0).setPresente(p);
@@ -82,6 +81,4 @@ public class Dungeon {
     public ArrayList<Room> getRooms() {
         return rooms;
     }
-
-
 }

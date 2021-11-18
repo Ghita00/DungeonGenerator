@@ -4,10 +4,11 @@ import Player.PG;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Random;
 
 public class Room implements Comparable<Room>{
     /****************** Field *******************/
-    //that is aux
+    //that is aux field
     private static int seed = 0;
 
     //they are the true field
@@ -23,7 +24,7 @@ public class Room implements Comparable<Room>{
     /****************** Costructor *******************/
     public Room(int y, int x){
         name = "stanza-" + seed;
-        ID = ++seed;
+        ID = seed++;
         size_y = y;
         size_x = x;
         items = new ArrayList<>();
@@ -32,7 +33,7 @@ public class Room implements Comparable<Room>{
     }
 
     public Room(int y, int x, String name){
-        ID = ++seed;
+        ID = seed++;
         this.name = name;
         size_y = y;
         size_x = x;
@@ -43,7 +44,7 @@ public class Room implements Comparable<Room>{
 
     public Room(int y, int x, ArrayList<Room> rooms) throws MyExc.MoreRoom {
         name = "stanza-" + seed;
-        ID = ++seed;
+        ID = seed++;
         size_y = y;
         size_x = x;
         items = new ArrayList<>();
@@ -58,7 +59,7 @@ public class Room implements Comparable<Room>{
     }
 
     public Room(int y, int x, String name, ArrayList<Room> rooms) throws MyExc.MoreRoom {
-        ID = ++seed;
+        ID = seed++;
         this.name = name;
         size_y = y;
         size_x = x;
@@ -71,6 +72,11 @@ public class Room implements Comparable<Room>{
         }else{
             throw new MyExc.MoreRoom();
         }
+    }
+
+    public static Room RandomRoom() {
+        Random r = new Random();
+        return new Room(r.nextInt()*10, r.nextInt()*10);
     }
 
     /****************** Method *******************/
@@ -121,7 +127,7 @@ public class Room implements Comparable<Room>{
         return search_room;
     }
 
-    public void Union(Room r) throws MyExc.MoreRoom, MyExc.OtherRoom{
+    public void UnionTwoRoom(Room r) throws MyExc.MoreRoom, MyExc.OtherRoom{
         if(Search(r) && !Brige(r)){
             MakeUnion(r);
         }else{
@@ -143,6 +149,8 @@ public class Room implements Comparable<Room>{
         this.presente = p;
     }
 
+    public void setAnother_rooms(ArrayList<Room> another_rooms) { this.another_rooms = another_rooms; }
+
     /****************** Getter *******************/
     public int getSize_x() {
         return size_x;
@@ -160,9 +168,16 @@ public class Room implements Comparable<Room>{
         return name;
     }
 
-    public PG getPresente() {
-        return presente;
+    public PG getPresente() { return presente; }
+
+    public int getID() {
+        return ID;
     }
+
+    public static int getSeed() {
+        return seed;
+    }
+
     /****************** For compare  *******************/
     @Override
     public int compareTo(Room o) {
