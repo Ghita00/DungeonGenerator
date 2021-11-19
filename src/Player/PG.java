@@ -5,7 +5,7 @@ import PKDungeon.Room;
 
 public class PG {
     static private PG instance = null;
-    private String name;
+    private final String name;
     private Room stay;
 
     private PG(){
@@ -20,7 +20,7 @@ public class PG {
         return instance;
     }
 
-    protected void setStay(Room stay) {
+    public void setStay(Room stay) {
         this.stay = stay;
     }
 

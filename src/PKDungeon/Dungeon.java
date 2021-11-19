@@ -4,13 +4,13 @@ import Player.PG;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Iterator;
+import java.util.Scanner;
 
 public class Dungeon {
     /****************** Field *******************/
     //design pattern of singleton
     static private Dungeon instance;
-    private ArrayList<Room> rooms;
+    private final ArrayList<Room> rooms;
 
     /****************** Costructor *******************/
     private Dungeon(){
@@ -42,26 +42,21 @@ public class Dungeon {
     }
 
     private void makeWalk(int old, int next){
-        PG present = rooms.get(old).getPresente();
+        PG.getInstage().setStay(rooms.get(next));
         rooms.get(old).setPresente(null);
-        rooms.get(next).setPresente(present);
+        rooms.get(next).setPresente(PG.getInstage());
     }
 
     public void nextRoom(){
-        Room r = null;
-        int i = 0;
-        int inputNum = -1;
-        boolean trovata = false;
-
-        while(i < rooms.size() && !trovata){
-            trovata = rooms.get(i).getPresente() != null;
-            r = rooms.get(i);
-        }
-
-        /*TODO lettura da input con inputNum*/
-
-        if(inputNum > 0 && inputNum <= 4 && r.getAnother_rooms().get(inputNum) != null){
-            makeWalk(i, inputNum-1);
+        int index = PG.getInstage().getStay().getID();
+        System.out.println("dove vuoi andare?");
+        Scanner input = new Scanner(System.in);
+        int next = input.nextInt() - 1;
+        if(rooms.get(index).getAnother_rooms().get(next) != null &&
+            rooms.get(index).getAnother_rooms().get(next).getID() != -1){
+            makeWalk(index, next);
+        }else{
+            nextRoom();
         }
     }
 

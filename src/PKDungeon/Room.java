@@ -9,7 +9,7 @@ import java.util.Random;
 public class Room implements Comparable<Room>{
     /****************** Field *******************/
     //that is aux field
-    private static int seed = 0;
+    private static int seed = -1;
 
     //they are the true field
     private final int ID;
@@ -81,9 +81,8 @@ public class Room implements Comparable<Room>{
 
     /****************** Method *******************/
     private void SetFirst(){
-        if(ID == 1){
+        if(ID == 0){
             this.start = true;
-            this.another_rooms.add(null);
         }else{
             this.start = false;
         }
@@ -168,7 +167,7 @@ public class Room implements Comparable<Room>{
         return name;
     }
 
-    public PG getPresente() { return presente; }
+
 
     public int getID() {
         return ID;

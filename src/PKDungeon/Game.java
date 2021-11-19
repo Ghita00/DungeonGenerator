@@ -1,10 +1,7 @@
 package PKDungeon;
 
-import PKDungeon.Dungeon;
-import PKDungeon.Room;
 import Player.PG;
 import Render.RenderRoom;
-
 import java.util.Collection;
 
 public class Game {
@@ -24,12 +21,11 @@ public class Game {
     }
 
     public void startGame(){
-        //System.out.println(Dungeon.getInstance().getRooms().size());
-        Dungeon.getInstance().getRooms().get(1).setPresente(PG.getInstage());
-        //while(!finish()){
+        Dungeon.getInstance().getRooms().get(0).setPresente(PG.getInstage());
+        while(!finish()){
             int index = PG.getInstage().getStay().getID();
             RenderRoom.Render(Dungeon.getInstance().getRooms().get(index));
             Dungeon.getInstance().nextRoom();
-        //}
+        }
     }
 }

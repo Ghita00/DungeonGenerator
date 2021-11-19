@@ -10,13 +10,13 @@ public class RenderRoom {
             }
             System.out.println();
         }
-        System.out.println("\nstanze connesse");
+        System.out.println("\nconnect rooms");
+
         for(int i = 0; i < r.getAnother_rooms().size(); i++){
-            if(r.getAnother_rooms().get(i) != null){
+            if(r.getAnother_rooms().get(i) != null && r.getAnother_rooms().get(i).getID() != -1){
                 System.out.println(i+1 +" - "+ r.getAnother_rooms().get(i).getName());
-            }else{
-                System.out.println(i+1 +" - il nulla");
             }
         }
+        System.out.println();
     }
 }
