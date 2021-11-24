@@ -1,6 +1,6 @@
 package PKDungeon;
 
-import Player.PG;
+import Creatures.PG;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -42,13 +42,13 @@ public class Dungeon {
     }
 
     private void makeWalk(int old, int next){
-        PG.getInstage().setStay(rooms.get(next));
+        PG.getInstage("0", 0, 0, 0, 0).setStay(rooms.get(next));
         rooms.get(old).setPresente(null);
-        rooms.get(next).setPresente(PG.getInstage());
+        rooms.get(next).setPresente(PG.getInstage("0", 0, 0, 0, 0));
     }
 
     public void nextRoom(){
-        int index = PG.getInstage().getStay().getID();
+        int index = PG.getInstage("0", 0, 0, 0, 0).getStay().getID();
         System.out.println("dove vuoi andare?");
         Scanner input = new Scanner(System.in);
         int next = input.nextInt() - 1;

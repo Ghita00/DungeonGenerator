@@ -1,5 +1,6 @@
 package Render;
 
+import Creatures.PG;
 import PKDungeon.Room;
 
 public class RenderRoom {
@@ -17,6 +18,8 @@ public class RenderRoom {
                 System.out.println(i+1 +" - "+ r.getAnother_rooms().get(i).getName());
             }
         }
+
+        System.out.println(PG.getInstage("0", 0, 0, 0, 0).toString());
         System.out.println();
     }
 }

@@ -1,6 +1,7 @@
 package PKDungeon;
 
-import Player.PG;
+import Creatures.PG;
+import Items.Item;
 
 import java.util.ArrayList;
 import java.util.Collection;

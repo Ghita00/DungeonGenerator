@@ -13,6 +13,8 @@ public class MyExc {
     //there is now the brige
     static public class PresentBrige extends Exception{ };
 
+    static public class MoreItems extends Exception{ };
+
 }
 
 

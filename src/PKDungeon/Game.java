@@ -1,6 +1,6 @@
 package PKDungeon;
 
-import Player.PG;
+import Creatures.PG;
 import Render.RenderRoom;
 import java.util.Collection;
 
@@ -17,13 +17,13 @@ public class Game {
     }
 
     private boolean finish(){
-        return PG.getInstage().getStay().getID() == Room.getSeed();
+        return PG.getInstage("0", 0, 0, 0, 0).getStay().getID() == Room.getSeed();
     }
 
     public void startGame(){
-        Dungeon.getInstance().getRooms().get(0).setPresente(PG.getInstage());
+        Dungeon.getInstance().getRooms().get(0).setPresente(PG.getInstage("0", 0, 0, 0, 03));
         while(!finish()){
-            int index = PG.getInstage().getStay().getID();
+            int index = PG.getInstage("0", 0, 0, 0, 0).getStay().getID();
             RenderRoom.Render(Dungeon.getInstance().getRooms().get(index));
             Dungeon.getInstance().nextRoom();
         }
